@@ -13,7 +13,7 @@ config:
   - npm install mocha
   - npm run build
   - npm install mocha -g
-  - mocha --compilers js:babel-register ./dist/test.js
+  - mocha ./dist/test.js --compilers js:babel-register 
   - npm install claudia -g
   - npm run gitlab-c-update
   - npm test
