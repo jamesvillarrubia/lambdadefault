@@ -16,9 +16,10 @@
     "l-run": "TMPDIR=/tmp ./node_modules/.bin/node-lambda run",
     "l-package": "TMPDIR=/tmp ./node_modules/.bin/node-lambda package  ",
     "l-deploy": "TMPDIR=/tmp ./node_modules/.bin/node-lambda deploy",
-    "c-create": "claudia create --region us-east-1 --api-module dist/api --timeout 40 --set-env-from-json ./config.production.json",
-    "c-update": "AWS_PROFILE=default claudia update --keep --cache-api-config --timeout 40 --set-env-from-json ./config.production.json --use-local-dependencies",
-    "c-test": "claudia test-lambda --event ./event.json"
+    "c-create": "claudia create --region us-east-1 --api-module dist/api --timeout 90 --set-env-from-json ./config.production.json",
+    "c-update": "AWS_PROFILE=default claudia update --keep --cache-api-config --timeout 90 --set-env-from-json ./config.production.json --use-local-dependencies",
+    "c-test": "claudia test-lambda --event ./event.json",
+    "gitlab-c-update":"AWS_PROFILE=default claudia update --keep --cache-api-config --timeout 90 --use-local-dependencies"
   },
   "babel": {
     "presets": [

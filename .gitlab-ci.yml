@@ -8,4 +8,4 @@ install_modules:
   script:
   - npm install
   - npm install claudia -g
-  - npm run c-update
+  - npm run gitlab-c-update
