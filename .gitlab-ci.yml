@@ -5,7 +5,7 @@ cache:
   - node_modules/
 
 install_modules:
-  scripts:
+  script:
   - npm install
   - npm install claudia -g
   - npm run c-update
