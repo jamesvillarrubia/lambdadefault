@@ -2,7 +2,7 @@ image: lambci/lambda:build-nodejs6.10
 
 cache:
   paths:
-  - node_modules
+  - node_modules/
 
 config_aws:
   script:
@@ -10,8 +10,10 @@ config_aws:
   - aws configure set aws_secret_access_key $GL_AWS_SECRET_ACCESS_KEY --profile default
   - aws iam get-user
 
-install_modueles:
+install_modules:
   script:
+  - npm install mocha -g
+  - mocha --compilers js:babel-register ./dist/test.js
   - npm run babel-dist-test
   - npm install
   - npm install claudia -g
