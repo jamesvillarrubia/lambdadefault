@@ -1,12 +1,11 @@
-before_script:
+image: lambci/lambda:build-nodejs6.10
 
-preflight:
-  script:
-    - echo "Hello"
+cache:
+  paths:
+  - node_modules/
 
-build:
-  script:
-    - sh dockerize.sh
-
-postflight:
-
+install_modules:
+  scripts:
+  - npm install
+  - npm install claudia -g
+  - npm run c-update
