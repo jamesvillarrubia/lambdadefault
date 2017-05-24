@@ -4,23 +4,37 @@ cache:
   paths:
   - node_modules/
 
-config_aws:
+stages:
+  - config
+  - build
+  - deploy
+  - test
+
+config:
+  stage: config
   script:
   - aws configure set aws_access_key_id $GL_AWS_ACCESS_KEY_ID --profile default 
   - aws configure set aws_secret_access_key $GL_AWS_SECRET_ACCESS_KEY --profile default
   - aws iam get-user
 
-install_modules:
+build:
+  stage: build
   script:
+  - npm install
   - npm install mocha -g
   - mocha --compilers js:babel-register ./dist/test.js
-  - npm run babel-dist-test
-  - npm install
   - npm install claudia -g
+  
+deploy:
+  stage: deploy
+  script:
   - npm run gitlab-c-update
 
 test:
+  stage: test
   script:
   - npm test
+
+
 
 
