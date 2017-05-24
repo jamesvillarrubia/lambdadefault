@@ -2,14 +2,23 @@ image: lambci/lambda:build-nodejs6.10
 
 cache:
   paths:
-  - node_modules/
+  - node_modules
 
-install_modules:
+config_aws:
   script:
   - aws configure set aws_access_key_id $GL_AWS_ACCESS_KEY_ID --profile default 
   - aws configure set aws_secret_access_key $GL_AWS_SECRET_ACCESS_KEY --profile default
   - aws iam get-user
-  - npm test
+
+install_modueles:
+  script:
+  - npm run babel-dist-test
   - npm install
   - npm install claudia -g
   - npm run gitlab-c-update
+
+test:
+  script:
+  -npm test
+
+
