@@ -1,0 +1,11 @@
+{
+  "lambda": {
+    "role": "micro-analyze-executor",
+    "name": "micro-analyze",
+    "region": "us-east-1"
+  },
+  "api": {
+    "id": "jxoabqy112",
+    "module": "dist/api"
+  }
+}

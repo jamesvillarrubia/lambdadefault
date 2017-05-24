@@ -1,0 +1,11 @@
+{
+  "lambda": {
+    "role": "bus-createfromurl-executor",
+    "name": "bus-createfromurl",
+    "region": "us-east-1"
+  },
+  "api": {
+    "id": "dg2rvb2f2k",
+    "module": "dist/api"
+  }
+}

@@ -1,0 +1,16 @@
+{
+    "AWS_FUNCTION_NAME":"bus-createfromurl",
+    "NER_HOST":"http://localhost:4321",
+    "HOME":"/tmp",
+    "PORT":"6010",
+    "HOSTNAME":"localhost",
+    "PROTOCOL":"http:",
+    "SER_PORT":"4001",
+    "API_PTCL":"http:",
+    "API_PORT":"5000",
+    "API_VERS":"v0",
+    "API_HOST":"localhost",
+    "DB_HOST":"127.0.0.1",
+    "DB_PORT":"27017",
+    "DB_NAME":"mtc_v5"
+}

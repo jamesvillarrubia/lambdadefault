@@ -1,0 +1,67 @@
+{
+  "name": "bus-createfromurl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "env-cmd ./config.local.json nodemon --exec npm run babel-node -- ./src/server.js",
+    "build": "babel src -d dist --copy-files",
+    "babel-node": "babel-node --presets=latest",
+    "test": "nodemon --ignore dist/ --exec npm run test-src",
+    "test-src": "env-cmd ./config.local.json npm run build && npm run babel-src-test",
+    "babel-src-test": "mocha --compilers js:babel-register ./src/test.js",
+    "test-dist": "env-cmd ./config.local.json npm run build && nodemon --exec npm run babel-dist-test",
+    "babel-dist-test": "env-cmd ./config.local.json mocha --compilers js:babel-register ./dist/test.js",
+    "l-setup": "TMPDIR=/tmp ./node_modules/.bin/node-lambda setup",
+    "l-run": "TMPDIR=/tmp ./node_modules/.bin/node-lambda run",
+    "l-package": "TMPDIR=/tmp ./node_modules/.bin/node-lambda package  ",
+    "l-deploy": "TMPDIR=/tmp ./node_modules/.bin/node-lambda deploy",
+    "c-create": "claudia create --region us-east-1 --api-module dist/api --timeout 40 --set-env-from-json ./config.production.json",
+    "c-update": "AWS_PROFILE=default claudia update --keep --cache-api-config --timeout 40 --set-env-from-json ./config.production.json --use-local-dependencies",
+    "c-test": "claudia test-lambda --event ./event.json"
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "article-parser": "^1.6.15",
+    "axios": "^0.16.1",
+    "babel-core": "^6.24.1",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-latest": "^6.24.1",
+    "babel-runtime": "^6.11.6",
+    "chrono-node": "^1.3.2",
+    "claudia-api-builder": "^2.4.1",
+    "dotenv": "^4.0.0",
+    "html-entities": "^1.2.1",
+    "isomorphic-fetch": "^2.2.1",
+    "micro": "^7.3.3",
+    "moment-timezone": "^0.5.13",
+    "node-fetch": "^1.7.0",
+    "read-art": "^0.5.4",
+    "sbd": "^1.0.12",
+    "text-statistics": "^0.1.1",
+    "natural": "^0.5.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.16.0",
+    "babel-plugin-transform-async-to-generator": "^6.16.0",
+    "babel-plugin-transform-class-properties": "^6.16.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-polyfill": "^6.9.1",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-es2017": "^6.22.0",
+    "babel-preset-latest": "^6.22.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "babel-preset-stage-3": "^6.22.0",
+    "babel-register": "^6.9.0",
+    "chai": "^3.5.0",
+    "claudia": "^2.11.0",
+    "expect.js": "^0.3.1",
+    "mocha": "^3.2.0"
+  }
+}
