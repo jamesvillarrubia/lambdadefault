@@ -19,6 +19,6 @@ install_modueles:
 
 test:
   script:
-  -npm test
+  - npm test
 
 
