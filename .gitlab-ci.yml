@@ -2,6 +2,7 @@ before_script:
 
 preflight:
   script:
+    - echo "Hello"
 
 build:
   script:
