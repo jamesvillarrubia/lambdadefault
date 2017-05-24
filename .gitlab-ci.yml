@@ -1,0 +1,11 @@
+before_script:
+
+preflight:
+  script:
+
+build:
+  script:
+    - sh dockerize.sh
+
+postflight:
+
