@@ -13,24 +13,39 @@ stages:
 config:
   stage: config
   script:
-  - aws configure set aws_access_key_id $GL_AWS_ACCESS_KEY_ID --profile default 
-  - aws configure set aws_secret_access_key $GL_AWS_SECRET_ACCESS_KEY --profile default
-  - aws iam get-user
+    - aws configure set aws_access_key_id $GL_AWS_ACCESS_KEY_ID --profile default 
+    - aws configure set aws_secret_access_key $GL_AWS_SECRET_ACCESS_KEY --profile default
+  cache:
+    key: ${CI_BUILD_REF_NAME}
+    paths:
+      - ~/.aws/
+  artifacts:
+    paths:
+     - ~/.aws/
 
 build:
   stage: build
   script:
-  - npm install
-  - npm install mocha  
-  - npm install claudia -g
+    - npm install
+    - npm install mocha
+    - npm install claudia -g
+    - npm run build
+  cache:
+    key: ${CI_BUILD_REF_NAME}
+    paths:
+      - node_modules/
+  artifacts:
+    paths:
+     - node_modules/
+     - dist/
+
   
 deploy:
   stage: deploy
   script:
-  - npm run build
-  - npm run gitlab-c-update
+    - npm run gitlab-c-update
 
 test:
   stage: test
   script:
-  - ./node_modules/.bin/mocha ./dist/test.js --compilers js:babel-register 
+    - ./node_modules/.bin/mocha ./dist/test.js --compilers js:babel-register 
