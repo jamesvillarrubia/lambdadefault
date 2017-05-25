@@ -10,11 +10,11 @@ var expect = require('expect.js');
 var axios = require('axios');
 
 var event = {
-  requestContext: {
-    resourcePath: '/',
-    httpMethod: 'POST'
+  'requestContext': {
+    'resourcePath': '/',
+    'httpMethod': 'POST'
   },
-  body: {
+  'body': {
     'url': 'https://en.wikipedia.org/wiki/Peter_Townsend_(RAF_officer)',
     'full': true,
     'user': 'test'
@@ -24,6 +24,7 @@ var event = {
 describe(process.env.AWS_FUNCTION_NAME, function () {
   // Make sure the NER server is running in your test env
   it('PREFLIGHT: The NER server is running', function (done) {
+    this.timeout(5000);
     try {
       var data = { data: 'George Washington was a great man.' };
       // console.log(data)
@@ -42,18 +43,19 @@ describe(process.env.AWS_FUNCTION_NAME, function () {
     }
   });
   it('PREFLIGHT: The API server is running', function (done) {
+    this.timeout(10000);
     try {
       // const data = {}
       // console.log(data)
-      var API_HOST = process.env.PTCL + '//' + process.env.API_HOST + ':' + process.env.API_PORT;
+      var API_HOST = process.env.API_PTCL + '//' + process.env.API_HOST + ':' + process.env.API_PORT;
       // console.log(API_HOST)
       axios.get(API_HOST).then(function (response) {
         // console.log('in response')
-        // console.log(response.data);
+        console.log(response);
         expect(response.data).to.eql('Please select a version: /v0');
         done();
       }).catch(function (error) {
-        // console.log(error);
+        console.log(error);
         done(error);
       });
     } catch (error) {
@@ -73,7 +75,7 @@ describe(process.env.AWS_FUNCTION_NAME, function () {
         done();
       } catch (err) {
         console.log(err);
-        console.log(data);
+        // console.log(data)
         done(err);
       }
     };
