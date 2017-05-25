@@ -1,5 +1,9 @@
 image: lambci/lambda:build-nodejs6.10
 
+before_script:
+  - aws configure set aws_access_key_id $GL_AWS_ACCESS_KEY_ID --profile default 
+  - aws configure set aws_secret_access_key $GL_AWS_SECRET_ACCESS_KEY --profile default
+  
 cache:
   paths:
   - node_modules/
@@ -13,17 +17,7 @@ stages:
 config:
   stage: config
   script:
-    - aws configure set aws_access_key_id $GL_AWS_ACCESS_KEY_ID --profile default 
-    - aws configure set aws_secret_access_key $GL_AWS_SECRET_ACCESS_KEY --profile default
-    - cd ~/.aws
-    - ls -la
-  cache:
-    key: ${CI_BUILD_REF_NAME}
-    paths:
-      - ~/.aws/
-  artifacts:
-    paths:
-     - ~/.aws/
+    - aws iam get-user
 
 build:
   stage: build
