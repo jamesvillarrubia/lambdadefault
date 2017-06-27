@@ -34,6 +34,8 @@ Add your module name to the following:
 
 Make sure you have your AWS credentials in ~/.aws/credentials
 
+Remove the config.production and config.staging files from gitignore
+
 Add your code into the service function of index.js
 
 For local dev, you can run ```npm start``` and use the express api in server.js.
@@ -43,3 +45,7 @@ The api.js is the code that is actually run in lieu of server.js when deployed t
 Add necessary modules to package.json
 
 Alter the test.js as necessary
+
+# How the deployment works
+
+- Gitlab default runner
