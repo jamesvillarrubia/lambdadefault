@@ -1,52 +1,37 @@
 {
-  "name": "bus-createfromurl",
+  "name": "werk-mailer",
   "version": "1.0.0",
-  "description": "",
-  "main": "dist/index.js",
+  "description": "This is a starter kit to run local tests and deploy a dockerized aws-lambda function.  This package will bundle all packages in the correct lambda env.",
+  "main": "./dist/index.js",
   "scripts": {
     "start": "env-cmd ./config.local.json nodemon --exec npm run babel-node -- ./src/server.js",
     "build": "babel src -d dist --copy-files",
-    "babel-node": "babel-node --presets=latest",
-    "test": "nodemon --ignore dist/ --exec npm run test-src",
+    "babel-node": "./node_modules/.bin/babel-node --presets=latest",
+    "test": "nodemon --ignore dist/ --exec npm run test-dist-babel",
     "test-src": "env-cmd ./config.local.json npm run build && npm run babel-src-test",
-    "babel-src-test": "mocha --compilers js:babel-register ./src/test.js",
+    "test-src-babel": "mocha --compilers js:babel-register ./src/test.js",
     "test-dist": "env-cmd ./config.local.json npm run build && nodemon --exec npm run babel-dist-test",
-    "babel-dist-test": "env-cmd ./config.local.json mocha --compilers js:babel-register ./dist/test.js",
-    "l-setup": "TMPDIR=/tmp ./node_modules/.bin/node-lambda setup",
-    "l-run": "TMPDIR=/tmp ./node_modules/.bin/node-lambda run",
-    "l-package": "TMPDIR=/tmp ./node_modules/.bin/node-lambda package  ",
-    "l-deploy": "TMPDIR=/tmp ./node_modules/.bin/node-lambda deploy",
+    "test-dist-babel": "env-cmd ./config.local.json mocha --compilers js:babel-register ./dist/test.js",
     "c-create": "claudia create --region us-east-1 --api-module dist/api --timeout 90 --set-env-from-json ./config.production.json",
     "c-update": "AWS_PROFILE=default claudia update --keep --cache-api-config --timeout 90 --set-env-from-json ./config.production.json --use-local-dependencies",
     "c-test": "claudia test-lambda --event ./event.json",
-    "gitlab-c-update":"AWS_PROFILE=default claudia update --keep --cache-api-config --timeout 90 --use-local-dependencies"
+    "gitlab-c-update": "AWS_PROFILE=default claudia update --keep --cache-api-config --timeout 90 --use-local-dependencies"
   },
-  "babel": {
-    "presets": [
-      "latest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/jamesvillarrubia/lambdadefault.git"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "article-parser": "^1.6.15",
-    "axios": "^0.16.1",
+    "aws-serverless-express": "^3.0.2",
     "babel-core": "^6.24.1",
     "babel-polyfill": "^6.23.0",
     "babel-preset-latest": "^6.24.1",
     "babel-runtime": "^6.11.6",
-    "chrono-node": "^1.3.2",
+    "body-parser": "^1.17.2",
     "claudia-api-builder": "^2.4.1",
-    "dotenv": "^4.0.0",
-    "html-entities": "^1.2.1",
-    "isomorphic-fetch": "^2.2.1",
-    "micro": "^7.3.3",
-    "moment-timezone": "^0.5.13",
-    "node-fetch": "^1.7.0",
-    "read-art": "^0.5.4",
-    "sbd": "^1.0.12",
-    "text-statistics": "^0.1.1",
-    "natural": "^0.5.1"
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "micro": "^7.3.3"
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",
@@ -64,5 +49,18 @@
     "claudia": "^2.11.0",
     "expect.js": "^0.3.1",
     "mocha": "^3.2.0"
-  }
+  },
+  "keywords": [
+    "lambda",
+    "docker",
+    "aws",
+    "nodejs",
+    "node"
+  ],
+  "author": "James Villarrubia",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jamesvillarrubia/lambdadefault/issues"
+  },
+  "homepage": "https://github.com/jamesvillarrubia/lambdadefault#readme"
 }

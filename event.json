@@ -1,0 +1,9 @@
+{
+  "requestContext": {
+    "resourcePath": "/",
+    "httpMethod": "POST"
+  },
+  "body": {
+    "text": "This is what I'm sending to my function"
+  }
+}
